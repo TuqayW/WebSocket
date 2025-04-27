@@ -9,7 +9,6 @@ function App() {
   const [selectedClient, setSelectedClient] = useState('');
   const [privateMessage, setPrivateMessage] = useState('');
   const [wsStatus, setWsStatus] = useState('Disconnected');
-  // Setting your local IP as the default
   const [serverIP, setServerIP] = useState('192.168.0.166');
   const [serverPort, setServerPort] = useState('8000');
   const [isConfigured, setIsConfigured] = useState(false);
@@ -17,7 +16,6 @@ function App() {
   const ws = useRef(null);
   const messagesEndRef = useRef(null);
 
-  // Connect to WebSocket server
   const connectWebSocket = () => {
     if (!serverIP || !serverPort) {
       alert('Please enter server IP and port');
@@ -26,7 +24,6 @@ function App() {
 
     setIsConfigured(true);
     
-    // Close existing connection if any
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
       ws.current.close();
     }
@@ -44,11 +41,9 @@ function App() {
     ws.current.onmessage = (event) => {
       const data = event.data;
       if (data.startsWith('CLIENT_LIST:')) {
-        // Handle client list update
         const clientsList = data.substring(12).split(',');
         setClients(clientsList.filter(client => client !== ''));
       } else {
-        // Handle regular message
         setMessages(prevMessages => [...prevMessages, data]);
       }
     };
@@ -57,7 +52,6 @@ function App() {
       console.log('Disconnected from WebSocket');
       setConnected(false);
       setWsStatus('Disconnected');
-      // Try to reconnect after 2 seconds
       setTimeout(connectWebSocket, 2000);
     };
 
@@ -67,7 +61,6 @@ function App() {
     };
   };
 
-  // Send message via WebSocket
   const sendMessage = (e) => {
     e.preventDefault();
     if (inputMessage.trim() && connected) {
@@ -76,7 +69,6 @@ function App() {
     }
   };
 
-  // Send private message via API
   const sendPrivateMessage = async (e) => {
     e.preventDefault();
     if (privateMessage.trim() && selectedClient) {
@@ -100,7 +92,6 @@ function App() {
     }
   };
 
-  // Fetch message history
   const fetchMessages = async () => {
     if (!isConfigured) return;
     
@@ -113,7 +104,6 @@ function App() {
     }
   };
 
-  // Fetch current client list
   const fetchClients = async () => {
     if (!isConfigured) return;
     
@@ -126,13 +116,11 @@ function App() {
     }
   };
 
-  // Auto-scroll to latest message
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    // We'll wait for manual connection now
     if (isConfigured) {
       fetchMessages();
       fetchClients();
