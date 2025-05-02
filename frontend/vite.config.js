@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '192.168.0.166',  // This allows access from other devices on the network
+    host: '192.168.0.108',  // This allows access from other devices on the network
     port: 3000,       // Specify a port
     strictPort: true, // Don't try another port if 3000 is in use
     hmr: {
@@ -14,13 +14,13 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to your FastAPI server
       '/api': {
-        target: 'http://192.168.0.166:8000',
+        target: 'http://192.168.0.108:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
       // Proxy WebSocket connections
       '/ws': {
-        target: 'ws://192.168.0.166:8000',
+        target: 'ws://192.168.0.108:8000',
         ws: true
       }
     }

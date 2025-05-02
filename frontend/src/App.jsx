@@ -9,7 +9,7 @@ function App() {
   const [selectedClient, setSelectedClient] = useState('');
   const [privateMessage, setPrivateMessage] = useState('');
   const [wsStatus, setWsStatus] = useState('Disconnected');
-  const [serverIP, setServerIP] = useState('192.168.0.166');
+  const [serverIP, setServerIP] = useState('192.168.0.108');
   const [serverPort, setServerPort] = useState('8000');
   const [isConfigured, setIsConfigured] = useState(false);
   

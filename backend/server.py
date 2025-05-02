@@ -83,4 +83,4 @@ async def get_messages():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="192.168.0.166", port=8000) # Run the FastAPI app on localhost
+    uvicorn.run(app, host=" 192.168.0.108", port=8000) # Run the FastAPI app on localhost
