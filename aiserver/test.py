@@ -5,7 +5,7 @@ import requests
 app = FastAPI()
 
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
-API_KEY = "sk-e8d222f33c2b4e8bab3a0a304a722fac"  # Replace or store securely
+API_KEY = "sk-e8d222f33c2b4e8bab3a0a304a722fac"
 
 class MessageRequest(BaseModel):
     message: str
